@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rive/rive.dart';
+import 'package:rive_animation/screens/entry_point.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -91,29 +92,7 @@ class _SignInFormState extends State<SignInForm> {
                     color: Color(0xFFFE0037),
                   ),
                   onPressed: () {
-                    setState(() {
-                      isShownDialog = true;
-                      isShownConfetti = true;
-                    });
-                    Future.delayed(const Duration(seconds: 1), () {
-                      if (_formKey.currentState!.validate()) {
-                        check.fire();
-                        Future.delayed(const Duration(seconds: 2), () {
-                          setState(() {
-                            isShownDialog = false;
-                          });
-                          confetti.fire();
-                        });
-                        
-                      } else {
-                        error.fire();
-                        Future.delayed(const Duration(seconds: 2), () {
-                          setState(() {
-                            isShownDialog = false;
-                          });
-                        });
-                      }
-                    });
+                    signIn(context);
                   },
                   label: const Text(
                     'Sign In',
@@ -137,9 +116,8 @@ class _SignInFormState extends State<SignInForm> {
                         child: RiveAnimation.asset(
                           'assets/RiveAssets/check.riv',
                           onInit: (artboard) {
-                            StateMachineController controller = getRiveController(
-                              artboard,
-                            );
+                            StateMachineController controller =
+                                getRiveController(artboard);
                             check = controller.findSMI('Check') as SMITrigger;
                             error = controller.findSMI('Error') as SMITrigger;
                             reset = controller.findSMI('Reset') as SMITrigger;
@@ -167,9 +145,8 @@ class _SignInFormState extends State<SignInForm> {
                           child: RiveAnimation.asset(
                             'assets/RiveAssets/confetti.riv',
                             onInit: (artboard) {
-                              StateMachineController controller = getRiveController(
-                                artboard,
-                              );
+                              StateMachineController controller =
+                                  getRiveController(artboard);
                               confetti =
                                   controller.findSMI('Trigger explosion')
                                       as SMITrigger;
@@ -185,5 +162,36 @@ class _SignInFormState extends State<SignInForm> {
             : const SizedBox(),
       ],
     );
+  }
+
+  void signIn(BuildContext context) {
+    setState(() {
+      isShownDialog = true;
+      isShownConfetti = true;
+    });
+    Future.delayed(const Duration(seconds: 1), () {
+      if (_formKey.currentState!.validate()) {
+        check.fire();
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            isShownDialog = false;
+          });
+          confetti.fire();
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const EntryPoint()),
+            );
+          });
+        });
+      } else {
+        error.fire();
+        Future.delayed(const Duration(seconds: 2), () {
+          setState(() {
+            isShownDialog = false;
+          });
+        });
+      }
+    });
   }
 }
