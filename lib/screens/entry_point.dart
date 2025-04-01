@@ -3,6 +3,7 @@ import 'package:rive/rive.dart';
 import 'package:rive_animation/components/animated_bar.dart';
 import 'package:rive_animation/constants.dart';
 import 'package:rive_animation/models/rive_asset.dart';
+import 'package:rive_animation/screens/home/home_view.dart';
 import 'package:rive_animation/utils/rive_utils.dart';
 
 class EntryPoint extends StatefulWidget {
@@ -78,6 +79,7 @@ class _EntryPointState extends State<EntryPoint> {
           ),
         ),
       ),
+      body: const HomeView(),
     );
   }
 }
