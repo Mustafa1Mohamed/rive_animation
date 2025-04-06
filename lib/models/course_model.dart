@@ -7,7 +7,7 @@ class Course {
   Course({
     required this.title,
     this.description = 'Build and animate an IOS apps from scratch',
-    this.iconSrc = 'assets/icons/ios.svg',
+    this.iconSrc = 'assets/icons/apple_box.svg',
     this.bgColor = const Color(0xff7553f6),
   });
 }
@@ -24,7 +24,7 @@ List<Course> recentCourses = [
   Course(title: 'State Machine'),
   Course(
     title: 'Animated Menu',
-    iconSrc: 'assets/icons/ios.svg',
+    iconSrc: 'assets/icons/apple_box.svg',
     bgColor: const Color(0xff9CC5ff),
   ),
   Course(

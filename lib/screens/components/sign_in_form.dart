@@ -16,7 +16,6 @@ class _SignInFormState extends State<SignInForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late SMITrigger error, check, reset, confetti;
   bool isShownDialog = false, isShownConfetti = false;
- 
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +30,8 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 16),
                 child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "";
@@ -50,6 +51,8 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 16),
                 child: TextFormField(
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "";
@@ -111,7 +114,7 @@ class _SignInFormState extends State<SignInForm> {
                           'assets/RiveAssets/check.riv',
                           onInit: (artboard) {
                             StateMachineController controller =
-                               RiveUtils.getRiveController(artboard);
+                                RiveUtils.getRiveController(artboard);
                             check = controller.findSMI('Check') as SMITrigger;
                             error = controller.findSMI('Error') as SMITrigger;
                             reset = controller.findSMI('Reset') as SMITrigger;
@@ -140,7 +143,7 @@ class _SignInFormState extends State<SignInForm> {
                             'assets/RiveAssets/confetti.riv',
                             onInit: (artboard) {
                               StateMachineController controller =
-                                 RiveUtils.getRiveController(artboard);
+                                  RiveUtils.getRiveController(artboard);
                               confetti =
                                   controller.findSMI('Trigger explosion')
                                       as SMITrigger;

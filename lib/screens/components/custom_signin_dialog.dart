@@ -35,9 +35,10 @@ Future<Object?> customSignInDialog(
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: SingleChildScrollView(
-                physics:const  NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 clipBehavior: Clip.none,
                 child: Stack(
+                  clipBehavior: Clip.none,
                   children: [
                     Column(
                       children: [
@@ -92,7 +93,7 @@ Future<Object?> customSignInDialog(
                             ),
                             IconButton(
                               padding: EdgeInsets.zero,
-                
+
                               onPressed: () {},
                               icon: SvgPicture.asset(
                                 'assets/icons/google_box.svg',
@@ -102,7 +103,7 @@ Future<Object?> customSignInDialog(
                             ),
                             IconButton(
                               padding: EdgeInsets.zero,
-                
+
                               onPressed: () {},
                               icon: SvgPicture.asset(
                                 'assets/icons/apple_box.svg',
@@ -112,12 +113,12 @@ Future<Object?> customSignInDialog(
                         ),
                       ],
                     ),
-                    const Positioned(
-                      bottom: -13,
+                    Positioned(
+                      bottom: -MediaQuery.of(context).size.height * .07,
                       left: 0,
                       right: 0,
-                
-                      child: CircleAvatar(
+
+                      child: const CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 16,
                         child: Icon(Icons.close, color: Colors.black),
