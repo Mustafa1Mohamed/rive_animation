@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_animation/components/animated_bar.dart';
+import 'package:rive_animation/components/menu_button.dart';
+import 'package:rive_animation/components/side_menue.dart';
 import 'package:rive_animation/constants.dart';
 import 'package:rive_animation/models/rive_asset.dart';
 import 'package:rive_animation/screens/home/home_view.dart';
@@ -14,11 +16,14 @@ class EntryPoint extends StatefulWidget {
 }
 
 class _EntryPointState extends State<EntryPoint> {
-  //late SMIBool iconTrigger;
+  late SMIBool isSideBarClosed;
   RiveAsset selectedButtomNavs = bottomNavs.first;
+  bool isSideMenuClosed = true;
+  late AnimationController controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor2,
       resizeToAvoidBottomInset: false,
       extendBody: true,
       bottomNavigationBar: SafeArea(
@@ -81,7 +86,45 @@ class _EntryPointState extends State<EntryPoint> {
           ),
         ),
       ),
-      body: const HomeView(),
+      body: Stack(
+        children: [
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.fastOutSlowIn,
+            left: isSideMenuClosed?-288:0,
+            width: 288,
+            height: MediaQuery.of(context).size.height,
+            child: const SideMenue(),
+          ),
+          Transform.translate(
+            offset: Offset(isSideMenuClosed ? 0 : 288, 0),
+            child: Transform.scale(
+              scale: isSideMenuClosed ? 1 : 0.8,
+              child: const ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(24)),
+                child: HomeView(),
+              ),
+            ),
+          ),
+          MenuButton(
+            press: () {
+              isSideBarClosed.value = !isSideBarClosed.value;
+              setState(() {
+                isSideMenuClosed = !isSideMenuClosed;
+              });
+            },
+            onInit: (artboard) {
+              StateMachineController controller = RiveUtils.getRiveController(
+                artboard,
+                stateMachine: 'State Machine',
+              );
+              isSideBarClosed = controller.findSMI('isOpen') as SMIBool;
+              isSideBarClosed.value = true;
+              // iconTrigger = controller.findSMI('active') as SMIBool;
+            },
+          ),
+        ],
+      ),
     );
   }
 }
