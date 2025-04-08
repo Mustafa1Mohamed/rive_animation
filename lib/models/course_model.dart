@@ -19,9 +19,52 @@ List<Course> courses = [
     iconSrc: 'assets/icons/ios.svg',
     bgColor: const Color(0xff80A4FF),
   ),
+  Course(title: 'Animation in SwiftUI'),
+  Course(
+    title: 'Animation in Flutter',
+    iconSrc: 'assets/icons/ios.svg',
+    bgColor: const Color(0xff80A4FF),
+  ),
+  Course(title: 'Animation in SwiftUI'),
+  Course(
+    title: 'Animation in Flutter',
+    iconSrc: 'assets/icons/ios.svg',
+    bgColor: const Color(0xff80A4FF),
+  ),
+  Course(title: 'Animation in SwiftUI'),
+  Course(
+    title: 'Animation in Flutter',
+    iconSrc: 'assets/icons/ios.svg',
+    bgColor: const Color(0xff80A4FF),
+  ),
 ];
 List<Course> recentCourses = [
   Course(title: 'State Machine'),
+  Course(
+    title: 'Animated Menu',
+    iconSrc: 'assets/icons/apple_box.svg',
+    bgColor: const Color(0xff9CC5ff),
+  ),
+  Course(
+    title: 'Animated Menu',
+    iconSrc: 'assets/icons/apple_box.svg',
+    bgColor: const Color(0xff9CC5ff),
+  ),
+  Course(
+    title: 'Animated Menu',
+    iconSrc: 'assets/icons/apple_box.svg',
+    bgColor: const Color(0xff9CC5ff),
+  ),
+  Course(
+    title: 'Animated Menu',
+    iconSrc: 'assets/icons/apple_box.svg',
+    bgColor: const Color(0xff9CC5ff),
+  ),
+  Course(
+    title: 'Animated Menu',
+    iconSrc: 'assets/icons/apple_box.svg',
+    bgColor: const Color(0xff9CC5ff),
+  ),
   Course(
     title: 'Animated Menu',
     iconSrc: 'assets/icons/apple_box.svg',

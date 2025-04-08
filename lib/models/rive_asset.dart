@@ -54,7 +54,7 @@ List<RiveAsset> sideMenu = [
     'assets/RiveAssets/icons.riv',
     artboard: "SETTINGS",
     statMachine: "SETTINGS_Interactivity",
-    title: "Home",
+    title: "Settings",
   ),
   RiveAsset(
     'assets/RiveAssets/icons.riv',
