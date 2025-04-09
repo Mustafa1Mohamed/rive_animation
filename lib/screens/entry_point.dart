@@ -55,65 +55,74 @@ class _EntryPointState extends State<EntryPoint>
       backgroundColor: backgroundColor2,
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      bottomNavigationBar: Transform.translate(
-        offset: Offset(0, 100*_animation.value),
-        child: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            margin: const EdgeInsets.symmetric(horizontal: 24),
-            decoration: BoxDecoration(
-              color: backgroundColor2.withOpacity(.8),
-              borderRadius: const BorderRadius.all(Radius.circular(24)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ...List.generate(
-                  bottomNavs.length,
-                  (index) => GestureDetector(
-                    onTap: () {
-                      bottomNavs[index].input!.change(true);
-                      if (bottomNavs[index] != selectedButtomNavs) {
-                        setState(() {
-                          selectedButtomNavs = bottomNavs[index];
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).padding.top *0.2,
+        ),
+        child: Transform.translate(
+          offset: Offset(0, 100 * _animation.value),
+          child: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              decoration: BoxDecoration(
+                // ignore: deprecated_member_use
+                color: backgroundColor2.withOpacity(.8),
+                borderRadius: const BorderRadius.all(Radius.circular(24)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ...List.generate(
+                    bottomNavs.length,
+                    (index) => GestureDetector(
+                      onTap: () {
+                        bottomNavs[index].input!.change(true);
+                        if (bottomNavs[index] != selectedButtomNavs) {
+                          setState(() {
+                            selectedButtomNavs = bottomNavs[index];
+                          });
+                        }
+                        Future.delayed(const Duration(seconds: 1), () {
+                          bottomNavs[index].input!.change(false);
                         });
-                      }
-                      Future.delayed(const Duration(seconds: 1), () {
-                        bottomNavs[index].input!.change(false);
-                      });
-                    },
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        AnimatedBar(
-                          isActive: bottomNavs[index] == selectedButtomNavs,
-                        ),
-                        SizedBox(
-                          height: 36,
-                          width: 36,
-                          child: Opacity(
-                            opacity:
-                                bottomNavs[index] == selectedButtomNavs ? 1 : 0.5,
-                            child: RiveAnimation.asset(
-                              bottomNavs.first.src,
-                              artboard: bottomNavs[index].artboard,
-                              onInit: (artboard) {
-                                StateMachineController controller =
-                                    RiveUtils.getRiveController(
-                                      artboard,
-                                      stateMachine: bottomNavs[index].statMachine,
-                                    );
-                                bottomNavs[index].input =
-                                    controller.findSMI('active') as SMIBool;
-                              },
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedBar(
+                            isActive: bottomNavs[index] == selectedButtomNavs,
+                          ),
+                          SizedBox(
+                            height: 36,
+                            width: 36,
+                            child: Opacity(
+                              opacity:
+                                  bottomNavs[index] == selectedButtomNavs
+                                      ? 1
+                                      : 0.5,
+                              child: RiveAnimation.asset(
+                                bottomNavs.first.src,
+                                artboard: bottomNavs[index].artboard,
+                                onInit: (artboard) {
+                                  StateMachineController controller =
+                                      RiveUtils.getRiveController(
+                                        artboard,
+                                        stateMachine:
+                                            bottomNavs[index].statMachine,
+                                      );
+                                  bottomNavs[index].input =
+                                      controller.findSMI('active') as SMIBool;
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -150,7 +159,7 @@ class _EntryPointState extends State<EntryPoint>
           AnimatedPositioned(
             duration: const Duration(milliseconds: 200),
             top: 16,
-            left: isSideMenuClosed? 0:220,
+            left: isSideMenuClosed ? 0 : 220,
             curve: Curves.fastOutSlowIn,
             child: MenuButton(
               press: () {

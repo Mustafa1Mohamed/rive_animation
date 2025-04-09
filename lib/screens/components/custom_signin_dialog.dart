@@ -29,6 +29,7 @@ Future<Object?> customSignInDialog(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
+              // ignore: deprecated_member_use
               color: Colors.white.withOpacity(0.94),
               borderRadius: const BorderRadius.all(Radius.circular(16)),
             ),
@@ -114,7 +115,7 @@ Future<Object?> customSignInDialog(
                       ],
                     ),
                     Positioned(
-                      bottom: -MediaQuery.of(context).size.height * .07,
+                      bottom: -MediaQuery.of(context).size.height * .04,
                       left: 0,
                       right: 0,
 
